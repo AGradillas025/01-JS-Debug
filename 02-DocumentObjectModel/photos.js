@@ -2,8 +2,8 @@
 
  *    Photo gallery
  *    Variables and functions
- *    Author: 
- *    Date:   
+ *    Author: Anthony S,A Gradillas
+ *    Date:   8.14.19
 
  *    Filename: photos.js
  */
@@ -12,6 +12,25 @@
 
 /* global variables */
 var photoOrder = [1,2,3,4,5];
+
+function populateFigures() {
+   var filename;
+   var currentFig;
+
+   if (figureCount === 3) {
+      for (var i = 1; i < 4; i++) {
+         filename = "images/IMG_0.jpg" + photoOrder[i] + "sm.jpg";
+         currentFig = document.getElementsByTagName("img")[i-1];
+         currentFig.src = filename;
+      }
+   } else {
+      for (var i = 1; i < 5; i++) {
+         filename = "images/IMG_0.jpg" + photoOrder[i] + "sm.jpg";
+         currentFig = document.getElementsByTagName("img")[i];
+         currentFig.src = filename;
+      }
+   }
+}
 
 /* shift all images one figure to the left, and change values in photoOrder array to match  */
 function rightArrow() {
@@ -37,9 +56,43 @@ function leftArrow() {
    }
 }
 
+function previewFive() {
+   alert("previewFive() event handler")
+}
+
 /* open center figure in separate window */
 function zoomFig() {
-   
+}
+
+/* right and left arrow functions to determine if they were clicked */
+function createEventListeners() {
+   var leftarrow = document.getElementById("leftarrow");
+   if (leftarrow.addEventListener) {
+      leftarrow.addEventListener("click", leftArrow, false);
+   } else if (leftarrow.attachEvent) {
+      leftarrow.attachEvent("onclick", leftArrow);
+   }
+
+   var rightarrow = document.getElementById("rightarrow");
+   if (leftarrow.addEventListener) {
+      rightarrow.addEventListener("click", rightArrow, false);
+   } else if (leftarrow.attachEvent) {
+      rightarrow.attachEvent("onclick", rightArrow);
+   }
+
+   var mainFig = document.getElementsByTagName("img")[1];
+   if (mainFig.addEventListener) {
+      mainFig.addEventListener("click", zoomFig, false);
+   } else if(mainFig.attachEvent) {
+      mainFig.attachEvent("onclick", zoomFig);
+   }
+
+   var showAllButton = document.querySelector("#fiveButton")
+   if (showAllButton.addEventListener) {
+      showAllButton.addEventListener("click", previewFive, false);
+   } else if (showAllButton.attachEvent) {
+      showAllButton.attachEvent("onclick", previewFive);
+   }
 }
 
 /* create event listeners and populate image elements */
